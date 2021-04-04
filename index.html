@@ -1,103 +1,184 @@
-<!DOCTYPE html>
 <html>
-
+ <!-- https://codepen.io/nathan76877/pen/WbqyEx -->
 <head>
-    <title></title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-        
-        div {
-            padding: 20px;
-            border: 5px solid black;
-        }
-        
-        h2 {
-            background: #efefef;
-            margin: 10px;
-        }
-        
-        .toPic {
-            display: none;
-        }
-    </style>
+<style>
+html, body {
+height: 100%;
+}
+html {
+background-image: url('https://www.jqueryscript.net/demo/Modern-Circular-jQuery-Countdown-Timer-Plugin-Final-Countdown/img/sample.jpg');
+background-position: center center;
+background-repeat: no-repeat;
+background-size: cover;
+}
+body {
+background-color: rgba(44,62,80 , 0.6 );
+background-image: url('https://www.jqueryscript.net/demo/Modern-Circular-jQuery-Countdown-Timer-Plugin-Final-Countdown/img/pattern.png');
+background-position: center;
+background-repeat: repeat;
+font-family: 'Raleway', 'Arial', sans-serif;
+}
+.countdown-container {
+position: relative;
+top: 50%;
+-webkit-transform: translateY(-50%);
+-moz-transform: translateY(-50%);
+transform: translateY(-50%);
+}
+.clock-item .inner {
+height: 0px;
+padding-bottom: 100%;
+position: relative;
+width: 100%;
+}
+.clock-canvas {
+background-color: rgba(255, 255, 255, .1);
+border-radius: 50%;
+height: 0px;
+padding-bottom: 100%;
+}
+.text {
+color: #fff;
+font-size: 30px;
+font-weight: bold;
+margin-top: -50px;
+position: absolute;
+top: 50%;
+text-align: center;
+text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+width: 100%;
+}
+.text .val {
+font-size: 50px;
+}
+.text .type-time {
+font-size: 20px;
+}
+ @media (min-width: 768px) and (max-width: 991px) {
+.clock-item {
+margin-bottom: 30px;
+}
+}
+ @media (max-width: 767px) {
+.clock-item {
+margin: 0px 30px 30px 30px;
+}
+}
+</style>
+
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script> 
+<script type="text/javascript" src="https://www.jqueryscript.net/demo/Modern-Circular-jQuery-Countdown-Timer-Plugin-Final-Countdown/js/kinetic.js"></script> 
+<script type="text/javascript" src="https://www.jqueryscript.net/demo/Modern-Circular-jQuery-Countdown-Timer-Plugin-Final-Countdown/jquery.final-countdown.js"></script> 
+<script>
+$('.countdown').final_countdown({
+start: '1362139200',
+end: '1388461320',
+now: '1387461319'
+});
+
+</script>
+<script>
+
+
+$(document).ready(function() {
+$('.countdown').final_countdown({
+start: '1362139200',
+end: '1388461320',
+now: '1387461319',
+selectors: {
+    value_seconds: '.clock-seconds .val',
+    canvas_seconds: 'canvas_seconds',
+    value_minutes: '.clock-minutes .val',
+    canvas_minutes: 'canvas_minutes',
+    value_hours: '.clock-hours .val',
+    canvas_hours: 'canvas_hours',
+    value_days: '.clock-days .val',
+    canvas_days: 'canvas_days'
+},
+seconds: {
+    borderColor: '#7995D5',
+    borderWidth: '6'
+},
+minutes: {
+    borderColor: '#ACC742',
+    borderWidth: '6'
+},
+hours: {
+    borderColor: '#ECEFCB',
+    borderWidth: '6'
+},
+days: {
+    borderColor: '#FF9900',
+    borderWidth: '6'
+}}, function() {
+// Finish callback
+});
+});
+</script>
 </head>
 
-<body>
-    <h2>原始HTML</h2>
-    <div style="background:red;width: 600px;" class="test">
-        <div style="background:green;">
-            <div style="background:blue;">
-                <div style="background:yellow;">
-                    <div style="background:orange;">
-                        33333333333333333333333333333333
-                    </div>
-                </div>
 
-            </div>
+   <body>
+<div class="countdown-container container">
+<div class="clock row">
 
-        </div>
-    </div>
-    <h2 class="toCanvas"> <a href="javascript:void(0);"> 转成canvas </a></h2>
-    <h2 class="toPic"><a href="javascript:void(0);"> 转成图片 </a></h2>
-    <h5>
-        <label for="imgW">宽度:</label>
-        <input type="number" value="" id="imgW" placeholder="默认是原图宽度" />
-        <label for="imgH">高度:</label>
-        <input type="number" value="" id="imgH" placeholder="默认是原图高度" />
-        <label for="imgFileName">文件名:</label>
-        <input type="text" placeholder="文件名" id="imgFileName" />
-        <select id="sel">
-                    <option value="png">png</option>
-                    <option value="jpeg">jpeg</option>
-                    <option value="bmp">bmp</option>
-            <option value="gif">gif</option>
-                </select>
-        <button id="save">保存</button>
-    </h5>
-    <script type="text/javascript" src="jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="html2canvas.min.js"></script>
-    <script type="text/javascript" src="canvas2image.js"></script>
-    <script type="text/javascript">
-        var test = $(".test").get(0); //将jQuery对象转换为dom对象
-        // 点击转成canvas
-        $('.toCanvas').click(function(e) {
-            // 调用html2canvas插件
-            html2canvas(test).then(function(canvas) {
-                // canvas宽度
-                var canvasWidth = canvas.width;
-                // canvas高度
-                var canvasHeight = canvas.height;
-                // 渲染canvas
-                $('.toCanvas').after(canvas);
-                // 显示‘转成图片’按钮
-                $('.toPic').show(1000);
-                // 点击转成图片
-                $('.toPic').click(function(e) {
-                    // 调用Canvas2Image插件
-                    var img = Canvas2Image.convertToImage(canvas, canvasWidth, canvasHeight);
-                    // 渲染图片
-                    $(".toPic").after(img);
-                    // 点击保存
-                    $('#save').click(function(e) {
-                        let type = $('#sel').val(); //图片类型
-                        let w = $('#imgW').val(); //图片宽度
-                        let h = $('#imgH').val(); //图片高度
-                        let f = $('#imgFileName').val(); //图片文件名
-                        w = (w === '') ? canvasWidth : w; //判断输入宽高是否为空，为空时保持原来的值
-                        h = (h === '') ? canvasHeight : h;
-                        // 调用Canvas2Image插件
-                        Canvas2Image.saveAsImage(canvas, w, h, type, f);
-                    });
-                });
+<!-- days --> 
+<div class="clock-item clock-days countdown-time-value col-sm-6 col-md-3">
+<div class="wrap">
+<div class="inner">
+<div id="canvas_days" class="clock-canvas"></div>
+<div class="text">
+<p class="val">0</p>
+<p class="type-days type-time">DAYS</p>
+</div>
+</div>
+</div>
+</div>
 
+<!-- hours --> 
 
-            });
-        });
-    </script>
+<div class="clock-item clock-hours countdown-time-value col-sm-6 col-md-3">
+<div class="wrap">
+<div class="inner">
+<div id="canvas_hours" class="clock-canvas"></div>
+<div class="text">
+<p class="val">0</p>
+<p class="type-hours type-time">HOURS</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- minutes --> 
+<div class="clock-item clock-minutes countdown-time-value col-sm-6 col-md-3">
+<div class="wrap">
+<div class="inner">
+<div id="canvas_minutes" class="clock-canvas"></div>
+<div class="text">
+<p class="val">0</p>
+<p class="type-minutes type-time">MINUTES</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- seconds --> 
+<div class="clock-item clock-seconds countdown-time-value col-sm-6 col-md-3">
+<div class="wrap">
+<div class="inner">
+<div id="canvas_seconds" class="clock-canvas"></div>
+<div class="text">
+<p class="val">0</p>
+<p class="type-seconds type-time">SECONDS</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
 </body>
-
 </html>
+
+   
