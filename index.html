@@ -2,22 +2,7 @@
     <head>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"> 
-		<script type="text/javascript" >
-		/**
- * Basic structure: TC_Class is the public class that is returned upon being called
- * 
- * So, if you do
- *      var tc = $(".timer").TimeCircles();
- *      
- * tc will contain an instance of the public TimeCircles class. It is important to
- * note that TimeCircles is not chained in the conventional way, check the
- * documentation for more info on how TimeCircles can be chained.
- * 
- * After being called/created, the public TimerCircles class will then- for each element
- * within it's collection, either fetch or create an instance of the private class.
- * Each function called upon the public class will be forwarded to each instance
- * of the private classes within the relevant element collection
- **/
+	<script type="text/javascript" > 
 (function($) {
 
     var useWindow = window;
@@ -964,46 +949,28 @@
     $.fn.TimeCircles = function(options) {
         return new TC_Class(this, options);
     };
-}(jQuery));
-
-		
-		
+}(jQuery)); 
 		</script>
 		 
-		<style>
-		/**
- *	This element is created inside your target element
- *	It is used so that your own element will not need to be altered
- **/
+		<style> 
 .time_circles {
     position: relative;
     width: 100%;
     height: 100%;
 }
-
-/**
- *	This is all the elements used to house all text used
- * in time circles
- **/
+ 
 .time_circles > div {
     position: absolute;
     text-align: center;
 }
-
-/**
- *	Titles (Days, Hours, etc)
- **/
-.time_circles > div > h4 {
+ .time_circles > div > h4 {
     margin: 0px;
     padding: 0px;
     text-align: center;
     text-transform: uppercase;
     font-family: 'Century Gothic', Arial;
 }
-
-/**
- *	Time numbers, ie: 12
- **/
+ 
 .time_circles > div > span {
     display: block;
     width: 100%;
